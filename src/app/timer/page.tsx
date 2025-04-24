@@ -9,22 +9,27 @@ export default function TimerAnim() {
   const timer = useRef<Timer | null>(null);
   const [isPlaying, setIsPlaying] = useState(false);
 
+  //Create timer on mount
   useEffect(() => {
     timer.current = createTimer({
       duration: 1000,
       loop: true,
       frameRate: 30,
+      //When the timer updates, set the time state to the current time property.
       onUpdate: (self) => setTime(self.currentTime),
+      //When it loops, set the count to the current iteration property
       onLoop: (self) => {
         setCount(self.currentIteration);
       },
     });
   }, []);
 
+  //Pause/play the timer by changing the isPlaying state
   const handlePlayButtonClick = (): void => {
     setIsPlaying(!isPlaying);
   };
 
+  //When isPlaying changes, play/pause the timer
   useEffect(() => {
     if (isPlaying) {
       timer.current?.play();
