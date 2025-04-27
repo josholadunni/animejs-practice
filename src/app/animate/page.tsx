@@ -63,6 +63,7 @@ export default function Animate() {
       loopDelay: 1000,
       delay: () => utils.random(0, 400),
       loop: true,
+      duration: 2000,
     });
   }, []);
 
