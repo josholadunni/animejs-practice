@@ -12,7 +12,7 @@ function Navbar() {
           <Link href="/timer">Timer</Link>
         </li>
         <li>
-          <Link href="/">C</Link>
+          <Link href="/animate">Animate</Link>
         </li>
         <li>
           <Link href="/">D</Link>
