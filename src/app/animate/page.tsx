@@ -61,6 +61,7 @@ export default function Animate() {
       rotate: "2turn",
       ease: "inOutCirc",
       loopDelay: 1000,
+      delay: () => utils.random(0, 400),
       loop: true,
     });
   }, []);
