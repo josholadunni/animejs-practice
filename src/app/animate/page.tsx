@@ -12,9 +12,16 @@ export default function Animate() {
     useRef<HTMLDivElement>(null),
   ];
 
+  const animations = {
+    anim1: boxRef1,
+    anim2: boxRef2,
+    anim3: boxRef3,
+    anim4: box4Elements,
+  };
+
   useEffect(() => {
-    if (boxRef1.current) {
-      animate(boxRef1.current, {
+    if (animations.anim1.current) {
+      animate(animations.anim1.current, {
         y: [
           { to: "-2.75rem", ease: "inBack", duration: "600" },
           { to: 0, ease: "inOutElastic", duration: 800, delay: 100 },
@@ -26,8 +33,8 @@ export default function Animate() {
       });
     }
 
-    if (boxRef2.current) {
-      animate(boxRef2.current, {
+    if (animations.anim2.current) {
+      animate(animations.anim2.current, {
         x: [
           { to: "-2.75rem", ease: "inBack", duration: "600" },
           { to: 0, ease: "inOutElastic", duration: 800, delay: 100 },
@@ -39,9 +46,9 @@ export default function Animate() {
       });
     }
 
-    if (boxRef3.current) {
+    if (animations.anim3.current) {
       // Set the CSS variables as properties on the animated elements
-      utils.set(boxRef3.current, {
+      utils.set(animations.anim3.current, {
         "--radius": "4px",
         "--y": "0rem",
         "--pseudo-el-after-scale": "1", // applied to the pseudo element "::after"
@@ -50,14 +57,14 @@ export default function Animate() {
       });
 
       // Animate the values of the CSS variables
-      animate(boxRef3.current, {
+      animate(animations.anim3.current, {
         "--radius": "20px",
         "--y": "16.5rem",
         "--pseudo-el-after-scale": "1.55", // Animates the ":after" pseudo element of the element
       });
     }
 
-    box4Elements.forEach((el, i) => {
+    animations.anim4.forEach((el, i) => {
       if (el.current) {
         animate(el.current, {
           y: parseInt(el.current.dataset.y || "0"),
@@ -71,6 +78,18 @@ export default function Animate() {
         });
       }
     });
+
+    return () => {
+      for (const [, ref] of Object.entries(animations)) {
+        if (Array.isArray(ref)) {
+          ref.forEach((r) => {
+            if (r.current) utils.remove(r.current);
+          });
+        } else if (ref.current) {
+          utils.remove(ref.current);
+        }
+      }
+    };
   });
 
   return (
