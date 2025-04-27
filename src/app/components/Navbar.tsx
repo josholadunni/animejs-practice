@@ -15,7 +15,7 @@ function Navbar() {
           <Link href="/animate">Animate</Link>
         </li>
         <li>
-          <Link href="/">D</Link>
+          <Link href="/composition">Composition</Link>
         </li>
         <li>
           <Link href="/">E</Link>

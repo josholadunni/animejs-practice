@@ -6,6 +6,11 @@ export default function Animate() {
   const boxRef1 = useRef<HTMLDivElement | null>(null);
   const boxRef2 = useRef<HTMLDivElement | null>(null);
   const boxRef3 = useRef<HTMLDivElement | null>(null);
+  const box4Elements = [
+    useRef<HTMLDivElement>(null),
+    useRef<HTMLDivElement>(null),
+    useRef<HTMLDivElement>(null),
+  ];
 
   useEffect(() => {
     if (boxRef1.current) {
@@ -52,20 +57,21 @@ export default function Animate() {
       });
     }
 
-    // Animate all box4 data-ref elements
-    const elements = document.querySelectorAll('[data-ref="box4"]');
-    animate(elements, {
-      y: ($el: unknown) =>
-        parseInt(($el as HTMLElement).getAttribute("data-y") || "0"),
-      x: (_: unknown, i: number) => 50 + -500 * i,
-      rotate: "2turn",
-      ease: "inOutBack",
-      loopDelay: 1000,
-      delay: () => utils.random(0, 400),
-      loop: true,
-      duration: 2000,
+    box4Elements.forEach((el, i) => {
+      if (el.current) {
+        animate(el.current, {
+          y: parseInt(el.current.dataset.y || "0"),
+          x: 50 + -500 * i,
+          rotate: "2turn",
+          ease: "inOutBack",
+          loopDelay: 1000,
+          delay: () => utils.random(0, 400),
+          loop: true,
+          duration: 2000,
+        });
+      }
     });
-  }, []);
+  });
 
   return (
     <div className="w-full">
@@ -79,27 +85,16 @@ export default function Animate() {
         Animate
       </div>
       <div className="flex">
-        <div
-          data-ref="box4"
-          data-y="100"
-          className="bg-red-400 w-fit px-5 mx-auto mt-20"
-        >
-          Animate
-        </div>
-        <div
-          data-ref="box4"
-          data-y="200"
-          className="bg-red-400 w-fit px-5 mx-auto mt-20"
-        >
-          Animate
-        </div>
-        <div
-          data-ref="box4"
-          data-y="300"
-          className="bg-red-400 w-fit px-5 mx-auto mt-20"
-        >
-          Animate
-        </div>
+        {[100, 200, 300].map((yValue, index) => (
+          <div
+            key={index}
+            ref={box4Elements[index]}
+            data-y={yValue}
+            className="bg-red-400 w-fit px-5 mx-auto mt-20"
+          >
+            Animate
+          </div>
+        ))}
       </div>
     </div>
   );
