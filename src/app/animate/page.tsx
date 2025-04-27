@@ -12,6 +12,7 @@ export default function Animate() {
     useRef<HTMLDivElement>(null),
   ];
 
+  //Object to store the references used to attach to each animation
   const refs = {
     anim1: boxRef1,
     anim2: boxRef2,
@@ -19,8 +20,10 @@ export default function Animate() {
     anim4: box4Elements,
   };
 
+  //Array of animation instances
   const instances: ReturnType<typeof animate>[] = [];
 
+  //UseEffect to add animation instances once mounted and references have been added.
   useEffect(() => {
     if (refs.anim1.current) {
       instances.push(
@@ -88,9 +91,9 @@ export default function Animate() {
         );
       }
     });
-
+    //Cleanup function
     return () => {
-      //Remove using references
+      //Remove animations using references
       Object.values(refs).forEach((refs) => {
         if (Array.isArray(refs)) {
           refs.forEach((r) => {
@@ -100,7 +103,7 @@ export default function Animate() {
           utils.remove(refs.current);
         }
       });
-      //Pause and reset instances
+      //Cancel instances
       instances.forEach((instance) => {
         instance.cancel();
       });
