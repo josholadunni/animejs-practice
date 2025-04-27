@@ -59,7 +59,7 @@ export default function Animate() {
         parseInt(($el as HTMLElement).getAttribute("data-y") || "0"),
       x: (_: unknown, i: number) => 50 + -500 * i,
       rotate: "2turn",
-      ease: "inOutCirc",
+      ease: "inOutBack",
       loopDelay: 1000,
       delay: () => utils.random(0, 400),
       loop: true,
