@@ -5,6 +5,7 @@ import { animate } from "animejs";
 export default function Keyframes() {
   const anim1 = useRef<HTMLDivElement | null>(null);
   const anim2 = useRef<HTMLDivElement | null>(null);
+  const anim3 = useRef<HTMLDivElement | null>(null);
 
   useEffect(() => {
     //Array of animation instances
@@ -26,7 +27,7 @@ export default function Keyframes() {
     if (anim2.current) {
       instances.push(
         animate(anim2.current, {
-          //Array of numbers used as keyframes
+          //Tween parameters keyframes
           x: [
             { to: "4rem", duration: 700, delay: 800 },
             { to: "10rem" },
@@ -35,6 +36,22 @@ export default function Keyframes() {
           y: [
             { to: "6rem", delay: 50 },
             { to: "16.5rem", delay: 500 },
+          ],
+          ease: "outBounce",
+        })
+      );
+    }
+
+    if (anim3.current) {
+      instances.push(
+        animate(anim3.current, {
+          //Duration based keyframes with keyframes array
+          keyframes: [
+            { y: "2rem", ease: "out", duration: 400 },
+            { x: "5rem", scale: 0.5, duration: 800 },
+            { y: "14.3rem", scale: 1, ease: "inOutBack", duration: 200 },
+            { x: "5rem", scale: 2, duration: 800 },
+            { x: "19rem", scale: 1, duration: 200 },
           ],
           ease: "outBounce",
         })
@@ -61,6 +78,12 @@ export default function Keyframes() {
       <div
         ref={anim2}
         className="bg-green-700 w-fit mt-10 mx-auto px-5 py-2 rounded-full text-white"
+      >
+        Keyframes
+      </div>
+      <div
+        ref={anim3}
+        className="bg-purple-700 w-fit mt-10 mx-auto px-5 py-2 rounded-full text-white"
       >
         Keyframes
       </div>
