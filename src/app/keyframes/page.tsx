@@ -14,7 +14,9 @@ export default function Keyframes() {
         //Array of numbers used as keyframes
         x: [0, 100, 300],
         y: [0, 100, 300],
-        duration: 3000,
+        scale: [1, 2, 1],
+        duration: 2000,
+        ease: "outExpo",
       });
     }
 
