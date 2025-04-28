@@ -6,12 +6,22 @@ export default function Keyframes() {
   const keyframeCircle = useRef<HTMLDivElement | null>(null);
 
   useEffect(() => {
+    //Define type for the animation function
+    let animation: ReturnType<typeof animate>;
+    //If the ref exists, assign animation function to typed variable
     if (keyframeCircle.current) {
-      animate(keyframeCircle.current, {
+      animation = animate(keyframeCircle.current, {
+        //Array of numbers used as keyframes
         x: [0, 100, 300],
         duration: 3000,
       });
     }
+
+    //Cleanup function
+    return () => {
+      //If there's an animation function, cancel it
+      if (animation) animation.cancel();
+    };
   }, []);
 
   return (
