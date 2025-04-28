@@ -13,6 +13,7 @@ export default function Keyframes() {
       animation = animate(keyframeCircle.current, {
         //Array of numbers used as keyframes
         x: [0, 100, 300],
+        y: [0, 100, 300],
         duration: 3000,
       });
     }
