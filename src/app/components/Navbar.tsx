@@ -18,7 +18,7 @@ function Navbar() {
           <Link href="/composition">Composition</Link>
         </li>
         <li>
-          <Link href="/">E</Link>
+          <Link href="/keyframes">Keyframes</Link>
         </li>
       </ul>
     </nav>
